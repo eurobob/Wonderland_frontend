@@ -177,7 +177,7 @@ export const zapinMint = createAsyncThunk(
             const gasPrice = await getGasPrice(provider);
 
             if (bond.isLP) {
-                if (token.isTcro) {
+                if (token.isONE) {
                     zapinTx = await zapinContract.ZapInLp(
                         ethers.constants.AddressZero,
                         bondAddress,
@@ -196,7 +196,7 @@ export const zapinMint = createAsyncThunk(
                     });
                 }
             } else {
-                if (token.isTcro) {
+                if (token.isONE) {
                     zapinTx = await zapinContract.ZapIn(
                         ethers.constants.AddressZero,
                         bondAddress,

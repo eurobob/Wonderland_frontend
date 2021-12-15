@@ -3,7 +3,7 @@ import { Networks } from "../constants/blockchain";
 const switchRequest = () => {
     return window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: "338" }],
+        params: [{ chainId: "1666600000" }],
     });
 };
 
@@ -12,13 +12,13 @@ const addChainRequest = () => {
         method: "wallet_addEthereumChain",
         params: [
             {
-                chainId: "338",
-                chainName: "Cronos Testnet",
-                rpcUrls: ["https://cronos-testnet-3.crypto.org:8545"],
-                blockExplorerUrls: ["https://cronos.crypto.org/explorer/testnet3"],
+                chainId: "1666600000",
+                chainName: "Harmony Mainenet",
+                rpcUrls: ["https://harmony-0-rpc.gateway.pokt.network"],
+                blockExplorerUrls: ["https://explorer.harmony.one/"],
                 nativeCurrency: {
-                    name: "TCRO",
-                    symbol: "TCRO",
+                    name: "ONE",
+                    symbol: "ONE",
                     decimals: 18,
                 },
             },

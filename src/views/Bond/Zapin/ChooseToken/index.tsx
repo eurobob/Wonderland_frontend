@@ -9,8 +9,8 @@ import { Skeleton } from "@material-ui/lab";
 import useTokens, { IAllTokenData } from "../../../../hooks/tokens";
 import { trim } from "../../../../helpers";
 import { IAllBondData } from "../../../../hooks/bonds";
-import { mim, wtcro } from "../../../../helpers/bond";
-import { mim as mimToken, wtcro as wtcroToken } from "../../../../helpers/tokens";
+import { wone } from "../../../../helpers/bond";
+import { mim as mimToken, wone as wtcroToken } from "../../../../helpers/tokens";
 
 interface IChooseTokenProps {
     open: boolean;
@@ -24,7 +24,7 @@ function ChooseToken({ open, handleClose, handleSelect, bond }: IChooseTokenProp
 
     const [quantity, setQuantity] = useState("");
 
-    const filtredTokens = tokens.filter(({ name, address, isTcro }) => {
+    const filtredTokens = tokens.filter(({ name, address, isONE }) => {
         let addressTest = true;
 
         if (quantity && quantity.length === 42) {
@@ -39,12 +39,12 @@ function ChooseToken({ open, handleClose, handleSelect, bond }: IChooseTokenProp
 
         let lpFilter = true;
 
-        if (bond.name === mim.name) {
-            lpFilter = mimToken.address !== address;
-        }
+        //if (bond.name === mim.name) {
+        //    lpFilter = mimToken.address !== address;
+        //}
 
-        if (bond.name === wtcro.name) {
-            lpFilter = isTcro ? false : wtcroToken.address !== address;
+        if (bond.name === wone.name) {
+            lpFilter = isONE ? false : wtcroToken.address !== address;
         }
 
         return nameTest && addressTest && lpFilter;

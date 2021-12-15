@@ -99,7 +99,7 @@ interface ICalcUserBondDetails {
 export interface IUserBondDetails {
     allowance: number;
     balance: number;
-    tcroBalance: number;
+    ONEBalance: number;
     interestDue: number;
     bondMaturationBlock: number;
     pendingPayout: number; //Payout formatted in gwei.
@@ -118,7 +118,7 @@ export const calculateUserBondDetails = createAsyncThunk("account/calculateUserB
                 interestDue: 0,
                 bondMaturationBlock: 0,
                 pendingPayout: "",
-                tcroBalance: 0,
+                ONEBalance: 0,
             });
         });
     }
@@ -140,8 +140,8 @@ export const calculateUserBondDetails = createAsyncThunk("account/calculateUserB
     balance = await reserveContract.balanceOf(address);
     const balanceVal = ethers.utils.formatEther(balance);
 
-    const tcroBalance = await provider.getSigner().getBalance();
-    const tcroVal = ethers.utils.formatEther(tcroBalance);
+    const ONEBalance = await provider.getSigner().getBalance();
+    const ONEVal = ethers.utils.formatEther(ONEBalance);
 
     const pendingPayoutVal = ethers.utils.formatUnits(pendingPayout, "gwei");
 
@@ -152,7 +152,7 @@ export const calculateUserBondDetails = createAsyncThunk("account/calculateUserB
         isLP: bond.isLP,
         allowance: Number(allowance),
         balance: Number(balanceVal),
-        tcroBalance: Number(tcroVal),
+        ONEBalance: Number(ONEVal),
         interestDue,
         bondMaturationBlock,
         pendingPayout: Number(pendingPayoutVal),
@@ -169,7 +169,7 @@ interface ICalcUserTokenDetails {
 export interface IUserTokenDetails {
     allowance: number;
     balance: number;
-    isTcro?: boolean;
+    isONE?: boolean;
 }
 
 export const calculateUserTokenDetails = createAsyncThunk("account/calculateUserTokenDetails", async ({ address, token, networkID, provider }: ICalcUserTokenDetails) => {
@@ -185,15 +185,15 @@ export const calculateUserTokenDetails = createAsyncThunk("account/calculateUser
         });
     }
 
-    if (token.isTcro) {
-        const tcroBalance = await provider.getSigner().getBalance();
-        const tcroVal = ethers.utils.formatEther(tcroBalance);
+    if (token.isONE) {
+        const ONEBalance = await provider.getSigner().getBalance();
+        const ONEVal = ethers.utils.formatEther(ONEBalance);
 
         return {
             token: token.name,
             tokenIcon: token.img,
-            balance: Number(tcroVal),
-            isTcro: true,
+            balance: Number(ONEVal),
+            isONE: true,
         };
     }
 

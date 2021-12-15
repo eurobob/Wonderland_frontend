@@ -1,7 +1,7 @@
 export const TOKEN_DECIMALS = 9;
 
 export enum Networks {
-    TCRO = 338,
+    ONE = 1666600000,
 }
 
-export const DEFAULD_NETWORK = Networks.TCRO;
+export const DEFAULD_NETWORK = Networks.ONE;

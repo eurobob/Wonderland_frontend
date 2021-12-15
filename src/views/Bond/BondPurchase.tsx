@@ -24,7 +24,7 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
     const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
 
     const [quantity, setQuantity] = useState("");
-    const [useTcro, setUseTcro] = useState(false);
+    const [useONE, setUseONE] = useState(false);
 
     const isBondLoading = useSelector<IReduxState, boolean>(state => state.bonding.loading ?? true);
     const [zapinOpen, setZapinOpen] = useState(false);
@@ -58,7 +58,7 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
                         networkID: chainID,
                         provider,
                         address: recipientAddress || address,
-                        useTcro,
+                        useONE,
                     }),
                 );
                 clearInput();
@@ -74,7 +74,7 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
                     networkID: chainID,
                     provider,
                     address: recipientAddress || address,
-                    useTcro,
+                    useONE,
                 }),
             );
             clearInput();
@@ -90,7 +90,7 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
     }, [bond.allowance]);
 
     const setMax = () => {
-        let amount: any = Math.min(bond.maxBondPriceToken * 0.9999, useTcro ? bond.tcroBalance * 0.99 : bond.balance);
+        let amount: any = Math.min(bond.maxBondPriceToken * 0.9999, useONE ? bond.ONEBalance * 0.99 : bond.balance);
 
         if (amount) {
             amount = trim(amount);
@@ -121,16 +121,16 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
         setZapinOpen(false);
     };
 
-    const displayUnits = useTcro ? "TCRO" : bond.displayUnits;
+    const displayUnits = useONE ? "ONE" : bond.displayUnits;
 
     return (
         <Box display="flex" flexDirection="column">
             <Box display="flex" justifyContent="space-around" flexWrap="wrap">
-                {bond.name === "wtcro" && (
+                {bond.name === "wone" && (
                     <FormControl className="ohm-input" variant="outlined" color="primary" fullWidth>
-                        <div className="tcro-checkbox">
-                            <input type="checkbox" checked={useTcro} onClick={() => setUseTcro(!useTcro)} />
-                            <p>Use TCRO</p>
+                        <div className="one-checkbox">
+                            <input type="checkbox" checked={useONE} onClick={() => setUseONE(!useONE)} />
+                            <p>Use ONE</p>
                         </div>
                     </FormControl>
                 )}
@@ -151,7 +151,7 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
                         }
                     />
                 </FormControl>
-                {hasAllowance() || useTcro ? (
+                {hasAllowance() || useONE ? (
                     <div
                         className="transaction-button bond-approve-btn"
                         onClick={async () => {
@@ -177,7 +177,7 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
                     <p>Zap</p>
                 </div>
 
-                {!hasAllowance() && !useTcro && (
+                {!hasAllowance() && !useONE && (
                     <div className="help-text">
                         <p className="help-text-desc">
                             Note: The "Approve" transaction is only needed when minting for the first time; subsequent minting only requires you to perform the "Mint" transaction.
@@ -195,7 +195,7 @@ function BondPurchase({ bond, slippage, recipientAddress }: IBondPurchaseProps) 
                                 <Skeleton width="100px" />
                             ) : (
                                 <>
-                                    {trim(useTcro ? bond.tcroBalance : bond.balance, 4)} {displayUnits}
+                                    {trim(useONE ? bond.ONEBalance : bond.balance, 4)} {displayUnits}
                                 </>
                             )}
                         </p>

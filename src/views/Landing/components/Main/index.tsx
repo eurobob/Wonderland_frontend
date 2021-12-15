@@ -10,9 +10,9 @@ function Main() {
                 <img src={DoveImg} alt="" />
             </div>
             <div className="landing-main-btns-wrap">
-                <Link href="#" target="_blank" rel="noreferrer">
+                <Link href="/stake" target="_blank" rel="noreferrer">
                     <div className="landing-main-btn">
-                        <p>Launching soon</p>
+                        <p>Enter app</p>
                     </div>
                 </Link>
                 <Link href="https://docs.dovedao.finance/" target="_blank" rel="noreferrer">
@@ -22,10 +22,10 @@ function Main() {
                 </Link>
             </div>
             <div className="landing-main-title-wrap">
-                <p>Dove Finance</p>
+                <p>Floki ONE OHM</p>
             </div>
             <div className="landing-main-help-text-wrap">
-                <p>A decentralized reserve currency built on Cronos.</p>
+                <p>A decentralized reserve currency built on Harmony ONE.</p>
                 <p>Stake and earn auto compounding interest</p>
             </div>
         </div>

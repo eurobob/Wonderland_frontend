@@ -7,7 +7,7 @@ import { Skeleton } from "@material-ui/lab";
 import ChooseToken from "./ChooseToken";
 import { IAllBondData } from "../../../hooks/bonds";
 import useTokens, { IAllTokenData } from "../../../hooks/tokens";
-import { tcro, mim } from "../../../helpers/tokens";
+import { one, mim } from "../../../helpers/tokens";
 import { shorten, trim } from "../../../helpers";
 import BondLogo from "../../../components/BondLogo";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ import { IReduxState } from "../../../store/slices/state.interface";
 import { changeApproval, calcZapinDetails, ITokenZapinResponse, zapinMint } from "../../../store/slices/zapin-thunk";
 import { IPendingTxn, isPendingTxn, txnButtonText } from "../../../store/slices/pending-txns-slice";
 import { useWeb3Context } from "../../../hooks";
-import { wtcro } from "../../../helpers/bond";
+import { wone } from "../../../helpers/bond";
 import AdvancedSettings from "../AdvancedSettings";
 import { ReactComponent as SettingsIcon } from "../../../assets/icons/settings.svg";
 import { warning } from "../../../store/slices/messages-slice";
@@ -39,9 +39,9 @@ function Zapin({ open, handleClose, bond }: IZapinProps) {
         return state.pendingTransactions;
     });
 
-    let defaultToken = tokens.find(token => token.name === tcro.name);
+    let defaultToken = tokens.find(token => token.name === one.name);
 
-    if (bond.name === wtcro.name) {
+    if (bond.name === wone.name) {
         defaultToken = tokens.find(token => token.name === mim.name);
     }
 
@@ -100,7 +100,7 @@ function Zapin({ open, handleClose, bond }: IZapinProps) {
 
     const setMax = () => {
         const maxBondPriceToken = bond.maxBondPriceToken / priceToken;
-        let amount: any = Math.min(maxBondPriceToken, token.isTcro ? token.balance * 0.99 : token.balance);
+        let amount: any = Math.min(maxBondPriceToken, token.isONE ? token.balance * 0.99 : token.balance);
 
         if (amount) {
             amount = trim(amount);
@@ -221,7 +221,7 @@ function Zapin({ open, handleClose, bond }: IZapinProps) {
                                     </InputAdornment>
                                 }
                             />
-                            {hasAllowance() || token.isTcro ? (
+                            {hasAllowance() || token.isONE ? (
                                 <div
                                     className="zapin-header-token-select-btn"
                                     onClick={async () => {
@@ -243,7 +243,7 @@ function Zapin({ open, handleClose, bond }: IZapinProps) {
                                 </div>
                             )}
                         </div>
-                        {!hasAllowance() && !token.isTcro && (
+                        {!hasAllowance() && !token.isONE && (
                             <div className="zapin-header-help-text">
                                 <p>Note: The "Approve" transaction is only needed when bonding for the first time</p>
                                 <p>for each token; subsequent bonding only requires you to perform the</p>

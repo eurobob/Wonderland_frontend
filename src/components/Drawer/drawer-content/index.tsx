@@ -43,7 +43,7 @@ function NavContent() {
 
                 {address && (
                     <div className="wallet-link">
-                        <Link href={`https://cronos.crypto.org/explorer/testnet3/address/${address}`} target="_blank">
+                        <Link href={`https://explorer.harmony.one/address/${address}`} target="_blank">
                             <p>{shorten(address)}</p>
                         </Link>
                     </div>
