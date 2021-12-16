@@ -10,7 +10,7 @@ function Main() {
                 <img src={DoveImg} alt="" />
             </div>
             <div className="landing-main-btns-wrap">
-                <Link href="/stake" target="_blank" rel="noreferrer">
+                <Link href={`app.${window.location.host}`} target="_blank" rel="noreferrer">
                     <div className="landing-main-btn">
                         <p>Enter app</p>
                     </div>

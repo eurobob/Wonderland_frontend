@@ -17,10 +17,10 @@ export const loadAppDetails = createAsyncThunk(
     "app/loadAppDetails",
     //@ts-ignore
     async ({ networkID, provider }: ILoadAppDetails) => {
-        const mimPrice = getTokenPrice("MIM");
+        const mimPrice = getTokenPrice("dai");
         const addresses = getAddresses(networkID);
 
-        const ohmPrice = getTokenPrice("OHM");
+        const ohmPrice = getTokenPrice("one");
         const ohmAmount = 1512.12854088 * ohmPrice;
 
         const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
